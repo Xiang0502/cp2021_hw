@@ -128,7 +128,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li><a href='About.html'>About</a><li class='has-children'><a href='Exam.html'>Exam</a><ul class='dropdown'><li><a href='w13.html'>w13</a></li></ul><li class='has-children'><a href='HW1.html'>HW1</a><ul class='dropdown'><li><a href='run.html'>run</a></li></ul><li><a href='HW2.html'>HW2</a><li class='has-children'><a href='HW3.html'>HW3</a><ul class='dropdown'><li><a href='Examples.html'>Examples</a></li></ul><li><a href='Curriculum Pacing.html'>Curriculum Pacing</a><li><a href='Final Project.html'>Final Project</a></li>
+                     <li><a href='About.html'>About</a><li class='has-children'><a href='Exam.html'>Exam</a><ul class='dropdown'><li><a href='w13.html'>w13</a></li></ul><li class='has-children'><a href='HW1.html'>HW1</a><ul class='dropdown'><li><a href='run.html'>run</a></li></ul><li class='has-children'><a href='HW2.html'>HW2</a><ul class='dropdown'><li><a href='可攜程式系統製作.html'>可攜程式系統製作</a></li></ul><li class='has-children'><a href='HW3.html'>HW3</a><ul class='dropdown'><li><a href='Examples.html'>Examples</a></li></ul><li><a href='Curriculum Pacing.html'>Curriculum Pacing</a><li class='has-children'><a href='Final Project.html'>Final Project</a><ul class='dropdown'><li><a href='Game:.html'>Game:</a></li>
                       </ul>
                 </nav>
               </div>
@@ -257,7 +257,15 @@ src = open(url).read()
 w13 = beditor.editor(src, "kw_editor", "kw_console", "kw__container", "kw_py_src")
 document["w13"].bind("click", w13.prog)
 </script>
-<p><button id="keyword">Keyword</button><button id="w13">列出 10 個座標</button></p><br />Exam << <a href='Exam.html'>Previous</a> <a href='HW1.html'>Next</a> >> HW1</div>
+<script type="text/python3">
+import beditor
+from browser import document
+url = "https://gist.githubusercontent.com/Xiang0502/aab6911980e8ef22b4e9c9b4a12da3b2/raw/d1f55a4e804bb0e5fc2a430c0a2e3cadac45e492/w13-2"
+src = open(url).read()
+w13_2 = beditor.editor(src, "kw_editor", "kw_console", "kw__container", "kw_py_src")
+document["w13_2"].bind("click", w13_2.prog)
+</script>
+<p><button id="keyword">Keyword</button><button id="w13">列出 10 個座標</button><button id="w13_2">畫表格</button></p><br />Exam << <a href='Exam.html'>Previous</a> <a href='HW1.html'>Next</a> >> HW1</div>
         
     <!-- footer -->
       <div class="container">
