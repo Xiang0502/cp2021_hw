@@ -537,9 +537,17 @@ check_input()
 <p style="padding-left: 30px;"><a href="https://bmsleight.github.io/brython-blocks/">https://bmsleight.github.io/brython-blocks/</a></p>
 <p style="padding-left: 60px;"><a href="https://github.com/mdecourse/brython-blocks">https://github.com/mdecourse/brython-blocks</a></p>
 <h2>Game:</h2>
-<script type="text/python3">
-import beditor
-from browser import document
+<!-- 導入 brython 程式庫 -->
+<script src="/static/brython.js"></script>
+<script src="/static/brython_stdlib.js"></script>
+<!-- 啟動 Brython -->
+<script>
+window.onload=function(){
+brython({debug:1, pythonpath:['/static/','./../downloads/py/']});
+}
+</script>
+<div id="brython_div"></div>
+<script type="text/python">
 # 從 browser 導入 document 並設為 doc
 from browser import document as doc
 # 使用者可以透過 window 當作介面使用其他 Javascript 功能
