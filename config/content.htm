@@ -145,25 +145,15 @@ doc['clear_bd'].bind('click', clear_bd)
 <div style="width: 100%; height: 100%;"><textarea autocomplete="off" id="kw_console"></textarea></div>
 <div id="brython_div"></div>
 <div class="col-md-0" height="1" id="graphics-column" width="1"></div>
-<p><!-- ****************************** keyword start -->
+<p><!-- ****************************** keyword start --></p>
 <script type="text/python3">
-from browser import document as doc
-# 導入位於 static 目錄下的 beditor.py 
 import beditor
-# 利用 beditor.py 中的 editor 類別建立案例, 對應到 kw1
-kw1 = beditor.editor("""# 導入 sys 模組
-import sys
-# 導入 keyword 模組
-import keyword
-# 利用 sys 模組中的 version_info 印出 Python 版次
-print("Python version: ", sys.version_info)
-# 利用 keyword 模組中的 kwlist 印出關鍵字
-print("Python keywords: ", keyword.kwlist)
-""", "kw_editor", "kw_console", "kw__container", "kw_py_src")
-# id 為 "keyword" 的按鈕點按時, 執行 kw1 物件中的 prog 方法
-doc["keyword"].bind('click', kw1.prog)
+from browser import document
+url = "https://gist.githubusercontent.com/Xiang0502/570a32544ee6f179de4cc8fed5fd527e/raw/687f2182a071a049f334fa282bf0b04feb79a49a/w12%25E5%25BB%25B6%25E4%25BC%25B8"
+src = open(url).read()
+w13_0 = beditor.editor(src, "kw_editor", "kw_console", "kw__container", "kw_py_src")
+document["w13_0"].bind("click", w13_0.prog)
 </script>
-</p>
 <script type="text/python3">
 import beditor
 from browser import document
@@ -180,7 +170,7 @@ src = open(url).read()
 w13_2 = beditor.editor(src, "kw_editor", "kw_console", "kw__container", "kw_py_src")
 document["w13_2"].bind("click", w13_2.prog)
 </script>
-<p><button id="keyword">Keyword</button><button id="w13">列出 10 個座標</button><button id="w13_2">畫表格</button></p><h2>w13</h2>
+<p><button id="w13_0">日本國旗</button><button id="w13">列出 10 個座標</button><button id="w13_2">畫表格</button></p><h2>w13</h2>
 <script src="/static/brython.js"></script>
 <script src="/static/brython_stdlib.js"></script>
 <!-- for ggame -->
