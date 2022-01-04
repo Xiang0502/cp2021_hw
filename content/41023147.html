@@ -147,10 +147,12 @@ img.add_border {
 <p>3.python教科書習題</p>
 <p><button id="w13">1~100</button><button id="w11">2.6_1</button><button id="w11_0">2.6_2</button><button id="w11_2">2.6_3</button></p>
 <p>4.作業三貪食蛇</p>
-<p><button id="snake">勤勞蛇</button><button id="snake2">蛇2</button>
+<p><button id="snake">勤勞蛇</button><button id="snake2">蛇2</button></p>
+<p>5.第十二週習題</p>
+<p><button id="w12">台灣國旗</button><button id="w12_2">日本國旗</button></p>
 <script src="./../cmsimde/static/brython.js"></script>
 <script src="./../cmsimde/static/brython_stdlib.js"></script>
-<!-- for ggame --></p>
+<!-- for ggame -->
 <p>
 <script src="./../cmsimde/static/jquery-3.3.1.min.js"></script>
 <script src="./../cmsimde/static/jquery-ui.1.12.1.min.js"></script>
@@ -331,6 +333,22 @@ url = "https://gist.githubusercontent.com/Xiang0502/1abebba846ee7d82a9758123b59d
 src = open(url).read()
 snake = beditor.editor(src, "kw_editor", "kw_console", "kw__container", "kw_py_src")
 document["snake"].bind("click", snake.prog)
+</script>
+<script type="text/python3">
+import beditor
+from browser import document
+url = "https://gist.githubusercontent.com/Xiang0502/b3ae219723752c8398e7e7a881ffbae0/raw/e8876a7172004c350ac10262e412901a07bcf38a/w12"
+src = open(url).read()
+w12 = beditor.editor(src, "kw_editor", "kw_console", "kw__container", "kw_py_src")
+document["w12"].bind("click", w12.prog)
+</script>
+<script type="text/python3">
+import beditor
+from browser import document
+url = "https://gist.githubusercontent.com/Xiang0502/570a32544ee6f179de4cc8fed5fd527e/raw/687f2182a071a049f334fa282bf0b04feb79a49a/w12%25E5%25BB%25B6%25E4%25BC%25B8"
+src = open(url).read()
+w12_2 = beditor.editor(src, "kw_editor", "kw_console", "kw__container", "kw_py_src")
+document["w12_2"].bind("click", w12_2.prog)
 </script>
 </p><br />Final Project << <a href='Final Project.html'>Previous</a> <a href='Game.html'>Next</a> >> Game</div>
         
