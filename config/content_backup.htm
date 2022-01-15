@@ -1239,17 +1239,181 @@ def clear_bd(ev):
     bd.clear()
 # Brython 3.3.4 內建的 container 名稱為  'container' 且 turtle 輸出為 svg 必須使用 div 訂定 id
 Ace = ace.Editor(editor_id="kw_editor", console_id="kw_console", container_id="kw__container", storage_id="kw_py_src" )
-Ace.editor.setValue("""# 導入 sys 模組
-import sys
-# 導入 keyword 模組
-import keyword
-def helloWorld():
-    print("Hello World!")
-helloWorld()
-# 利用 sys 模組中的 version_info 印出 Python 版次
-print("Python version: ", sys.version_info)
-# 利用 keyword 模組中的 kwlist 印出關鍵字
-print("Python keywords: ", keyword.kwlist)
+Ace.editor.setValue("""# 從 browser 導入 document 並設為 doc
+from browser import document as doc
+# 使用者可以透過 window 當作介面使用其他 Javascript 功能
+from browser import html, window
+# 用於定時執行特定函式
+#import browser.timer
+from browser import timer
+# 導入數學模組
+import math
+# 導入亂數模組
+import random
+canvas = html.CANVAS(width = 750, height = 750)
+canvas.id = "canvas"
+brython_div = doc["brython_div"]
+brython_div <= canvas
+canvas = doc["canvas"]
+ctx = canvas.getContext("2d")
+score_doc = html.DIV("score")
+score_doc.id = "score"
+brython_div <= score_doc
+#生成啟動按鈕
+brython_div <= html.BUTTON("啟動", id="power") 
+#基本數值設定
+#起始分數
+score=0
+#每一個方格大小
+w=h=50
+#綠色方塊目前的位置
+px=py=0
+x=y=0
+#為紅色方塊之位置
+ax=[]
+ay=[]
+#綠色方塊之前的位置
+px1=py1=-1
+o=c=f=0
+#生成五個座標並在座標生成紅方塊
+for i in range(0,5):
+    a=(random.randint(1,14))*50
+    b=(random.randint(1,14))*50
+    #將生成亂數a插入ax[]中
+    ax.insert(i,a)
+    #將生成亂數b插入ay[]中
+    ay.insert(i,b) 
+    #填入紅色
+    ctx.fillStyle = "red"
+    #生成一矩形並控制其座標置中於方格
+    ctx.fillRect( ax[i]+2.5, ay[i]+2.5, 45, 45)
+    #將生成的X，Y座標數值比較並排列
+for i in range(0,4): 
+    for j in range(i+1,5):
+        #如果後面的數值大於前者則兩數值交換
+        if (ax[i]+ay[i])>(ax[j]+ay[j]):
+            #將ax[i]和ax[j]數值交換
+            tmp = ax[i] 
+            ax[i] = ax[j]
+            ax[j] = tmp
+            #將ay[i]和ay[j]數值交換
+            tmp2 = ay[i]
+            ay[i] = ay[j]
+            ay[j] = tmp2
+#輸出紅方格的位置
+print(ax,ay)
+for i in range(15):
+    #X的位置(第幾排)
+    xpos = x+i*w  
+    for j in range(15):
+        #Y的位置(第幾列)
+        ypos = y+j*h 
+        #將線寬設定為1
+        ctx.lineWidth = 1 
+        #邊框設定為(填入)黑色
+        ctx.strokeStyle = "black"
+        #填入一個邊框並設定位置
+        ctx.strokeRect(xpos, ypos, w, h)
+        
+#定義update_score2函式
+def update_score2(new_score): 
+    #將score_doc.innerHTML定義為"Score:"並加上字串new_score
+    score_doc.innerHTML = "Score: " + str(new_score)
+    
+#設定game函數
+def game(): 
+    #引入畫布中數值
+    global vx,vy,px,py,px1,py1,o,ax,ay,score,c,f
+    #呼叫update_score2(score)函式
+    update_score2(score) 
+    #清除前一個方塊
+    ctx.clearRect(1.75+px1, 1.75+py1, 46.5, 46.5) 
+    #將方塊設定為(填入)綠色
+    ctx.fillStyle = "green" 
+    #生成一矩形並控制其座標置中於方格
+    ctx.fillRect( px+2.5, py+2.5, 45, 45)
+    #如果綠方塊走到紅方塊就執行if迴圈
+    if ax[f]==px and ay[f]==py:
+        #目標換成下一個方塊
+        f=f+1 
+    #方塊回到原點時
+    if px==0 and py==0 and px1==50 : 
+        #將c設定為1
+        c=1 
+    #c等於0時執行
+    if c == 0:  
+        #X為0且Y不等於14時向下
+        if px==0 and py!=14*h:
+            vx=0
+            vy=50
+        #Y為14且X不等於14時向右
+        if py==14*h and px!=14*w:
+            vx=50
+            vy=0
+        #X為14且Y不等於0時向上
+        if px==14*w and py!=0:
+            vx=0
+            vy=-50
+        #Y為0且X不等於0時向左
+        if py==0 and px!=0:
+            vx=-50
+            vy=0
+        #紀錄前一個綠方塊x座標
+        px1=px 
+        #紀錄前一個綠方塊y座標
+        py1=py 
+        #綠方塊x座標加vx
+        px+=vx 
+        #綠方塊y座標加vy
+        py+=vy 
+        
+    #c等於1時執行if迴圈
+    if c == 1:       
+        if px!=ax[f] or py!=ay[f]: 
+            #如果綠方塊的X座標小於紅方塊之X座標則向右
+            if px<ax[f]: 
+                vx=50
+                vy=0
+            #如果綠方塊的X座標小於紅方塊之X座標則向左
+            if px>ax[f]: 
+                vx=-50
+                vy=0
+            #如果綠方塊的X座標小於紅方塊之X座標則向下
+            if py<ay[f]: 
+                vx=0
+                vy=50
+            #如果綠方塊的X座標小於紅方塊之X座標向上
+            if py>ay[f]: 
+                vx=0
+                vy=-50
+        #紀錄前一個綠方塊x座標
+        px1=px 
+        #紀錄前一個綠方塊y座標
+        py1=py 
+        #綠方塊x座標加vx
+        px+=vx 
+        #綠方塊y座標加vy
+        py+=vy 
+    for o in range(5):
+        if ax[o] == px and ay[o] == py: 
+            #分數加一
+            score += 1 
+            #刪除已吃到紅色方塊的x座標
+            del ax[o]
+            #刪除已吃到紅色方塊的x座標
+            del ay[o] 
+#呼叫game函式
+game() 
+#停止移動
+move = None
+def game2(ev) : 
+    global move
+    #當move為None時執行
+    if move is None : 
+        #game函式100秒執行一次
+        move = timer.set_interval(game, 100)
+#點擊按鈕並執行game函式
+doc["power"].bind("click", game2)        
 """)
 Ace.editor.scrollToRow(0)
 Ace.editor.gotoLine(0)
